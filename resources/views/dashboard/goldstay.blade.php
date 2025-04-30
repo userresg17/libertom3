@@ -1,0 +1,128 @@
+<x-app-layout>
+    <x-slot name="header">
+        {{ __('GoldStay (GST) - Seu Ouro Digital') }}
+    </x-slot>
+
+    <div class="space-y-6">
+        {{-- Card de Saldo e Informações Principais --}}
+        <x-card class="bg-gradient-to-br from-amber-900/30 via-gray-850 to-gray-850 border-amber-500/40">
+             <div class="p-6">
+                <div class="flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
+                    {{-- Saldo GST e Equivalente Fiat --}}
+                    <div>
+                        <div class="flex items-center mb-1 space-x-2">
+                             <x-heroicon-o-cube class="w-7 h-7 text-amber-400"/>
+                             <h2 class="text-lg font-semibold text-gray-100">Meu Saldo GoldStay</h2>
+                        </div>
+                        <p class="text-4xl font-bold text-white">{{ number_format($goldStayBalance ?? 0, 8) }} <span class="text-2xl font-medium text-amber-400">GST</span></p>
+                        <p class="mt-1 text-sm text-gray-400">Equivalente a aprox. ${{ number_format($goldStayValueUSD ?? 0, 2) }} USD</p> {{-- Ou outra moeda base --}}
+                         {{-- Informação de Lastro (1 GST = 1g Ouro) --}}
+                         <p class="mt-1 text-xs text-gray-500">[cite: 174] 1 GST = 1 grama de ouro fino</p>
+                    </div>
+                     {{-- Ações Rápidas GoldStay --}}
+                    <div class="flex flex-wrap justify-start flex-shrink-0 gap-3 lg:justify-end">
+                         {{-- A visibilidade destes botões depende das funcionalidades implementadas --}}
+                         @if(config('libertom.features.goldstay_buy'))
+                            <x-button.primary href="{{ route('goldstay.buy') }}"> {{-- Rota de exemplo --}}
+                                <x-heroicon-o-shopping-cart class="w-5 h-5 mr-1"/> Comprar GST
+                            </x-button.primary>
+                         @endif
+                         @if(config('libertom.features.goldstay_sell'))
+                             <x-button.secondary href="{{ route('goldstay.sell') }}"> {{-- Rota de exemplo --}}
+                                 <x-heroicon-o-currency-dollar class="w-5 h-5 mr-1"/> Vender GST
+                             </x-button.secondary>
+                         @endif
+                         <x-button.secondary href="{{ route('goldstay.deposit') }}"> {{-- Rota de exemplo --}}
+                             <x-heroicon-o-arrow-down class="w-5 h-5 mr-1"/> Depositar GST
+                         </x-button.secondary>
+                          <x-button.secondary href="{{ route('goldstay.withdraw') }}"> {{-- Rota de exemplo --}}
+                             <x-heroicon-o-arrow-up class="w-5 h-5 mr-1"/> Sacar GST
+                         </x-button.secondary>
+                    </div>
+                 </div>
+
+                {{-- Endereço da Carteira Polygon --}}
+                <div class="pt-4 mt-4 border-t border-amber-700/30" x-data="{ copied: false }">
+                    <h3 class="text-sm font-medium text-gray-400">Seu Endereço GoldStay (Polygon ERC-20)</h3>
+                    <div class="flex items-center justify-between mt-1">
+                        {{-- Exibir endereço da carteira Polygon do usuário --}}
+                        <p class="font-mono text-base text-gray-100 break-all">{{ $user->goldStayWallet->polygon_address ?? 'Endereço Indisponível' }}</p> [cite: 57, 88]
+                        <button @click="navigator.clipboard.writeText('{{ $user->goldStayWallet->polygon_address ?? '' }}'); copied = true; setTimeout(() => copied = false, 1500)"
+                                class="p-1.5 text-gray-400 rounded hover:bg-gray-700 hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                                title="Copiar Endereço">
+                            <span x-show="!copied"><x-heroicon-o-clipboard-copy class="w-5 h-5"/></span>
+                            <span x-show="copied" class="text-green-400"><x-heroicon-o-check class="w-5 h-5"/></span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500">Use este endereço para receber GoldStay de fontes externas na rede Polygon.</p>
+                </div>
+
+             </div>
+        </x-card>
+
+        {{-- Card Informativo sobre GoldStay --}}
+        <x-card>
+            <div class="p-6">
+                 <h3 class="mb-3 text-lg font-semibold text-gray-100">Sobre o GoldStay</h3>
+                 <div class="prose prose-sm prose-invert max-w-none text-gray-400">
+                    <p>[cite: 267, 171] GoldStay (GST) é um token digital (stablecoin) onde cada unidade é 100% lastreada e equivale a 1 grama de ouro fino.</p>
+                    <p>[cite: 269, 3, 87] Ele opera como um token ERC-20 na rede blockchain Polygon, oferecendo a segurança e estabilidade do ouro com a flexibilidade e eficiência das criptomoedas.</p>
+                    <p>[cite: 268] Use GoldStay para proteger seu patrimônio contra a inflação e a desvalorização de moedas, realizar transferências com baixo custo ou simplesmente manter uma reserva de valor estável.</p>
+                    <p>[cite: 277, 278, 279, 301] A filosofia "Seu Ouro, Suas Regras" garante que você possa sacar seus tokens GST para sua carteira pessoal (autocustódia) a qualquer momento com taxas mínimas.</p>
+                    <p><a href="/goldstay-whitepaper" target="_blank" class="text-amber-400 hover:underline">Saiba mais no Whitepaper do GoldStay</a></p> {{-- Link para o PDF ou página informativa --}}
+                </div>
+            </div>
+        </x-card>
+
+        {{-- Histórico de Transações GoldStay --}}
+         <x-card>
+             <div class="flex items-center justify-between p-4 border-b border-gray-700">
+                 <h3 class="font-semibold text-gray-100">Histórico de Transações GoldStay</h3>
+                 {{-- Filtros (opcional) --}}
+             </div>
+             <x-table :headers="['Data', 'Tipo', 'Descrição/Hash', 'Quantidade (GST)', 'Status']">
+                  @forelse ($goldstayTransactions as $tx)
+                     <tr class="hover:bg-gray-750">
+                         <x-table.td>{{ $tx->created_at->format('d/m/Y H:i') }}</x-table.td>
+                         <x-table.td>
+                            {{-- Melhorar tipo com base nos dados --}}
+                            <span class="px-2 py-0.5 text-xs rounded-full {{ $tx->type_color ?? 'bg-gray-700 text-gray-300' }}">
+                                {{ $tx->type_label ?? ucfirst($tx->type) }}
+                            </span>
+                         </x-table.td>
+                         <x-table.td>
+                            <span class="font-mono text-xs break-all" title="{{ $tx->details ?? $tx->tx_hash ?? '' }}">
+                                {{ Str::limit($tx->details ?? $tx->tx_hash ?? 'N/A', 30) }}
+                                @if($tx->tx_hash)
+                                    {{-- Link para PolygonScan --}}
+                                    <a href="https://polygonscan.com/tx/{{ $tx->tx_hash }}" target="_blank" class="ml-1 text-amber-400 hover:underline">
+                                         <x-heroicon-o-external-link class="inline w-3 h-3"/>
+                                     </a>
+                                @endif
+                            </span>
+                         </x-table.td>
+                         <x-table.td>
+                             <span class="{{ ($tx->amount ?? 0) >= 0 ? 'text-green-400' : 'text-red-400' }}">
+                                 {{ ($tx->amount ?? 0) >= 0 ? '+' : '-' }} {{ number_format(abs($tx->amount ?? 0), 8) }}
+                             </span>
+                         </x-table.td>
+                         <x-table.td>
+                             <x-badge :color="$tx->status == 'completed' ? 'green' : ($tx->status == 'pending' ? 'yellow' : 'red')">
+                                 {{ ucfirst($tx->status) }}
+                             </x-badge>
+                         </x-table.td>
+                     </tr>
+                  @empty
+                      <tr>
+                         <x-table.td colspan="5" class="text-center">Nenhuma transação GoldStay encontrada.</x-table.td>
+                      </tr>
+                  @endforelse
+             </x-table>
+              {{-- Paginação --}}
+             <div class="p-4 bg-gray-800 border-t border-gray-700">
+                 {{ $goldstayTransactions->links() }}
+             </div>
+        </x-card>
+
+    </div>
+</x-app-layout>

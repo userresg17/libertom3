@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /administracao/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+Disallow: /api/
+Disallow: /storage/
+Disallow: /uploads/
+
+Sitemap: https://libertom.com/sitemap.xml
