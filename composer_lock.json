@@ -1,0 +1,152 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "15e7a9d90d26c7482edeb7bb74e27d3b",
+    "packages": [
+        {
+            "name": "laravel/framework",
+            "version": "v10.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "7c70682765e302e87953e01032c75c211dc195df"
+            },
+            "time": "2023-07-18T20:47:10+00:00"
+        },
+        {
+            "name": "laravel/sanctum",
+            "version": "v3.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sanctum.git",
+                "reference": "8ebda85d41d9bfc3410f7dcba4eff8f2e8268d24"
+            },
+            "time": "2023-07-14T14:34:33+00:00"
+        },
+        {
+            "name": "laravel/tinker",
+            "version": "v2.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/tinker.git",
+                "reference": "04a2d3bd0d650c0764f70bf49d1ee39393e4eb4f"
+            },
+            "time": "2023-04-04T17:05:57+00:00"
+        },
+        {
+            "name": "laravel/ui",
+            "version": "v4.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "a58ec468db4a340b33f3426c778784717a8edec1"
+            },
+            "time": "2023-05-20T16:11:02+00:00"
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "version": "v5.10.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "f5d1ba8464f5574365c33d4be87d454e3644fcf5"
+            },
+            "time": "2023-07-14T07:26:22+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v10.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "9e8055d55e8212ad844f48d7e640806d69305146"
+            },
+            "time": "2023-06-29T21:54:09+00:00"
+        },
+        {
+            "name": "tymon/jwt-auth",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tymondesigns/jwt-auth.git",
+                "reference": "b0868a5b00801889a9e0c81a737934911221b323"
+            },
+            "time": "2023-01-31T15:37:32+00:00"
+        },
+        {
+            "name": "web3p/ethereum-php",
+            "version": "0.12.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/web3p/ethereum-php.git",
+                "reference": "ddccf37d61f10670c49caed7fad9e9dcf0ed7b0d"
+            },
+            "time": "2022-10-13T06:20:35+00:00"
+        },
+        {
+            "name": "web3p/web3.php",
+            "version": "0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/web3p/web3.php.git",
+                "reference": "2242fcc0ecb66a8df31e409c121ae4c257a5c80c"
+            },
+            "time": "2021-08-02T10:32:21+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "fakerphp/faker",
+            "version": "v1.23.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "e3daa170d00fde61ea7719ef47bb09bb8f1d9b01"
+            },
+            "time": "2023-06-12T08:44:38+00:00"
+        },
+        {
+            "name": "pestphp/pest",
+            "version": "v2.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pestphp/pest.git",
+                "reference": "1ab7fc7c5516aba10fda806918336933b92c330c"
+            },
+            "time": "2023-06-23T11:57:16+00:00"
+        },
+        {
+            "name": "pestphp/pest-plugin-laravel",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pestphp/pest-plugin-laravel.git",
+                "reference": "b9c6a80cbec8fabbcc25a92af81ef98dd9857006"
+            },
+            "time": "2023-01-20T10:31:58+00:00"
+        },
+        {
+            "name": "spatie/laravel-ignition",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-ignition.git",
+                "reference": "ea2856b669ed01c47891e47c257ff695eebb44b0"
+            },
+            "time": "2023-07-13T13:44:05+00:00"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^8.1"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
